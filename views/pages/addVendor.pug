@@ -1,0 +1,25 @@
+//- Making the page that adds the vendor
+doctype html
+html(lang="en")
+    head
+        title Add New Vendor
+    body
+        include ../partial/header
+        br
+
+        div#main
+            h2 Add New Vendor:
+            label(for='vendorName') Vendor name:
+            input#vendorName(type='text' name='vendorName' value="")
+            br
+            label(for='deliveryFee') Delivery Fee:
+            input#deliveryFee(type='text' name='deliveryFee' value="")
+            br
+            label(for='minOrder') Minimum Order:
+            input#minOrder(type='text' name='minOrder' value="")
+            br
+            input#save_button(type='submit' value='Add' onclick='addVendor()')
+            br
+
+        include ../partial/footer
+        script(src='/addvendor.js')

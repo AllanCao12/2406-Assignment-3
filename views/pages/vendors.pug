@@ -1,0 +1,16 @@
+//- Pug that displays a list of all the vendors
+
+doctype html
+html(lang="en")
+    head
+        title Vendor
+    body
+        include ../partial/header
+        br
+
+        div#main
+            - for(let vendor of vendors)
+                a(href=`/vendors/${vendor.id}`) #{vendor.name}
+                br
+
+        include ../partial/footer

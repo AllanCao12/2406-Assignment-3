@@ -1,0 +1,76 @@
+//- Pug file for each individual vendor. 
+doctype html
+html(lang="en")
+    head
+        title Vendor
+    body(onload=`init(${vendor.id})`)
+        include ../partial/header
+        br
+        //- Info for the current vendor and also allows the user to change the info. 
+        div#info
+            h2 Vendor:
+            label(for='vendorName') Vendor name:
+            input#vendorName(type='text' name='vendorName' value=`${vendor.name}`)
+            br
+            label(for='deliveryFee') Delivery Fee:
+            input#deliveryFee(type='text' name='deliveryFee' value=`${vendor.delivery_fee}`)
+            br
+            label(for='minOrder') Minimum Order:
+            input#minOrder(type='text' name='minOrder' value=`${vendor.min_order}`)
+            br
+            //- This is the save button mentioned in the assignment
+            input#save_button(type='submit' value='Save' onclick='changeVendor()') 
+            br
+        //- Making the rest of the page
+        div#main(style="overflow: auto")
+            div#left(style="float: left; width: 30%") 
+                div#categories
+                    h3 Categories 
+                    - for(let cat in vendor.supplies)
+                        a(href=`#${cat}`) #{cat}
+                        br
+                div#addCategory 
+                    h3 New category 
+                    input#newCategory(type='text' name='newCategory')
+                    input#newCatButton(type='submit' value='Add' onclick='addCategory()')
+                    br
+                div#addSupply
+                    h3 New Supply 
+                    label(for="supplyCategory") Category:
+                    select#supplyCategory(name="supplyCategory")
+                        - for(let cat in vendor.supplies)
+                            option(value=`${cat}`)= cat
+                    br
+                    label(for="itemName") Item Name:
+                    input#itemName(type='text' name='itemName')
+                    br
+                    label(for="itemPrice") Item Price:
+                    input#itemPrice(type='text' name='itemPrice')
+                    br
+                    label(for="itemStock") Item Stock:
+                    input#itemStock(type='text' name='itemStock')
+                    br
+                    label(for="itemDescription") Item Description:
+                    input#itemDescription(type='text' name='itemDescription')
+                    br
+                    input#newSupplyButton(type='submit' value='Add' onclick='addSupply()')
+                    br
+            div#middle(style="float:left; width: 70%")
+                div#supplyList 
+                    -for(let cat in vendor.supplies)
+                        div(id=`cat_${cat}`)
+                            b= cat
+                            a(name=`${cat}`)
+                            br
+                            - for(let item_id in vendor.supplies[cat])
+                                - let item = vendor.supplies[cat][item_id]
+                                div(id=`supply_${item_id}`)
+                                    text #{item_id}: #{item.name}  ($#{item.price}, stock=#{item.stock})
+                                    br 
+                                    text #{item.description}
+                                    br
+                                    br
+
+
+        include ../partial/footer
+        script(src='/vendor.js')
