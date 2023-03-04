@@ -1,5 +1,8 @@
 Allan Cao: Assignment 3 submision for COMP 2406
 Student Id: 101218998
+
+Created an online store using node.js and express.
+
 Running instructions:
 
 Type "node .\server.js" into the terminal and open up localhost:3000. 
